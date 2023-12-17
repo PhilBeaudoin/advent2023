@@ -1,11 +1,11 @@
 import minimist from 'minimist'
 import fs from 'fs-extra'
 
+type Func = (lines: string[]) => Promise<any>
+
 import dec1 from './dec1'
-
-type func = (lines: string[]) => Promise<any>
-
-const days: func[][] = [dec1]
+import dec2 from './dec2'
+const days: Func[][] = [dec1, dec2]
 
 const argv = minimist(process.argv.slice(2))
 const day = parseInt(argv._[0], 10)
