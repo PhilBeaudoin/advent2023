@@ -11,7 +11,8 @@ import dec5 from './dec5'
 import dec6 from './dec6'
 import dec7 from './dec7'
 import dec8 from './dec8'
-const days: Func[][] = [dec1, dec2, dec3, dec4, dec5, dec6, dec7, dec8]
+import dec9 from './dec9'
+const days: Func[][] = [dec1, dec2, dec3, dec4, dec5, dec6, dec7, dec8, dec9]
 
 const argv = minimist(process.argv.slice(2))
 const day = parseInt(argv._[0], 10)
