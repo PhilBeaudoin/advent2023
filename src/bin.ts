@@ -12,7 +12,19 @@ import dec6 from './dec6'
 import dec7 from './dec7'
 import dec8 from './dec8'
 import dec9 from './dec9'
-const days: Func[][] = [dec1, dec2, dec3, dec4, dec5, dec6, dec7, dec8, dec9]
+import dec10 from './dec10'
+const days: Func[][] = [
+  dec1,
+  dec2,
+  dec3,
+  dec4,
+  dec5,
+  dec6,
+  dec7,
+  dec8,
+  dec9,
+  dec10,
+]
 
 const argv = minimist(process.argv.slice(2))
 const day = parseInt(argv._[0], 10)
@@ -27,8 +39,8 @@ const file = argv.ex ? `example` : `input`
 
 async function run() {
   let path = `./src/dec${day}/${file}`
-  if (await fs.pathExists(path + '.txt')) path += '.txt'
-  else path += `${part}.txt`
+  if (await fs.pathExists(path + `${part}.txt`)) path += `${part}.txt`
+  else path += `.txt`
   const input = await fs.readFile(path, 'utf8')
   const lines = input.split('\n')
   if (lines.length > 0 && lines[lines.length - 1] === '') lines.pop()
