@@ -13,6 +13,7 @@ import dec7 from './dec7'
 import dec8 from './dec8'
 import dec9 from './dec9'
 import dec10 from './dec10'
+import dec11 from './dec11'
 const days: Func[][] = [
   dec1,
   dec2,
@@ -24,6 +25,7 @@ const days: Func[][] = [
   dec8,
   dec9,
   dec10,
+  dec11,
 ]
 
 const argv = minimist(process.argv.slice(2))
