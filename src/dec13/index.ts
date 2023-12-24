@@ -1,17 +1,11 @@
+import { flipStr, transpose } from '../utils'
+
 type EqFunc = (a: string, b: string) => boolean
 
 function oneDiff(a: string, b: string): boolean {
   return (
     a.split('').reduce((acc, cur, i) => acc + (cur === b[i] ? 0 : 1), 0) === 1
   )
-}
-
-function transpose(matrix: string[]): string[] {
-  const result: string[] = []
-  for (let i = 0; i < matrix[0].length; i++) {
-    result.push(matrix.map((row) => row[i]).join(''))
-  }
-  return result
 }
 
 function readMatrix(lines: string[]): string[] {
@@ -23,15 +17,13 @@ function readMatrix(lines: string[]): string[] {
   }
   return matrix
 }
-function reverseString(str: string): string {
-  return str.split('').reverse().join('')
-}
+
 function isSymmetrical(matrix: string[], len: number, eq: EqFunc): boolean {
   const width = matrix[0].length
   const strLen = Math.min(len, width - len)
   const str1 = matrix.map((row) => row.slice(len - strLen, len)).join('')
   const str2 = matrix
-    .map((row) => reverseString(row.slice(len, len + strLen)))
+    .map((row) => flipStr(row.slice(len, len + strLen)))
     .join('')
   return eq(str1, str2)
 }
