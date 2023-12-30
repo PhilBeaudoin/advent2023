@@ -1,6 +1,8 @@
 import { Pos } from './pos'
 
-export type Dir = 'n' | 'e' | 's' | 'w'
+export const DIRS = ['n', 'e', 's', 'w'] as const
+
+export type Dir = (typeof DIRS)[number]
 
 export function flipDir(dir: Dir): Dir {
   switch (dir) {
@@ -41,15 +43,15 @@ export function rotateCCW(dir: Dir): Dir {
   }
 }
 
-export function move(pos: Pos, dir: Dir): Pos {
+export function move(pos: Pos, dir: Dir, dist = 1): Pos {
   switch (dir) {
     case 'n':
-      return { x: pos.x, y: pos.y - 1 }
+      return { x: pos.x, y: pos.y - dist }
     case 'e':
-      return { x: pos.x + 1, y: pos.y }
+      return { x: pos.x + dist, y: pos.y }
     case 's':
-      return { x: pos.x, y: pos.y + 1 }
+      return { x: pos.x, y: pos.y + dist }
     case 'w':
-      return { x: pos.x - 1, y: pos.y }
+      return { x: pos.x - dist, y: pos.y }
   }
 }
