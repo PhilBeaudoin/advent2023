@@ -1,4 +1,4 @@
-import { flipMatrix, transpose } from '../utils'
+import { hFlipSMatrix, transposeS } from '../strMatrix'
 
 function rowWeight(row: string): number {
   const width = row.length
@@ -8,7 +8,7 @@ function rowWeight(row: string): number {
 }
 
 function matrixWeight(matrix: string[]): number {
-  return transpose(matrix).reduce((acc, cur) => acc + rowWeight(cur), 0)
+  return transposeS(matrix).reduce((acc, cur) => acc + rowWeight(cur), 0)
 }
 
 function packRow(row: string): string {
@@ -31,15 +31,15 @@ function packWest(matrix: string[]): string[] {
 }
 
 function packNorth(matrix: string[]): string[] {
-  return transpose(packWest(transpose(matrix)))
+  return transposeS(packWest(transposeS(matrix)))
 }
 
 function packEast(matrix: string[]): string[] {
-  return flipMatrix(packWest(flipMatrix(matrix)))
+  return hFlipSMatrix(packWest(hFlipSMatrix(matrix)))
 }
 
 function packSouth(matrix: string[]): string[] {
-  return transpose(flipMatrix(packWest(flipMatrix(transpose(matrix)))))
+  return transposeS(hFlipSMatrix(packWest(hFlipSMatrix(transposeS(matrix)))))
 }
 
 function cycle(matrix: string[]): string[] {

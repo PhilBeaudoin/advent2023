@@ -1,11 +1,5 @@
-interface Coord {
-  x: number
-  y: number
-}
-
-function transposeArray<T>(array: T[][]): T[][] {
-  return array[0].map((_, colIndex) => array.map((row) => row[colIndex]))
-}
+import { transposeMatrix } from '../matrix'
+import { Pos, manhattanDist, posEq } from '../pos'
 
 function findEmptyRows(grid: string[][]) {
   return grid.reduce((acc, row, i) => {
@@ -28,7 +22,7 @@ function computeShift(grid: string[][], emptyCols: number[]) {
 function app(lines: string[], expansion: number) {
   const grid = lines.map((line) => line.split(''))
   const emptyRows = findEmptyRows(grid)
-  const transposedGrid = transposeArray(grid)
+  const transposedGrid = transposeMatrix(grid)
   const emptyCols = findEmptyRows(transposedGrid)
 
   const shiftX = computeShift(grid, emptyCols)
@@ -43,14 +37,13 @@ function app(lines: string[], expansion: number) {
         })
     })
     return acc
-  }, [] as Coord[])
+  }, [] as Pos[])
 
   const result: number[] = []
   for (const coord1 of coords) {
     for (const coord2 of coords) {
-      if (coord1 === coord2) continue
-      const dist = Math.abs(coord1.x - coord2.x) + Math.abs(coord1.y - coord2.y)
-      result.push(dist)
+      if (posEq(coord1, coord2)) continue
+      result.push(manhattanDist(coord1, coord2))
     }
   }
   const sum = result.reduce((acc, dist) => acc + dist, 0)

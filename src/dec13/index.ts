@@ -1,4 +1,5 @@
-import { flipStr, transpose } from '../utils'
+import { flipStr } from '../strings'
+import { transposeS } from '../strMatrix'
 
 type EqFunc = (a: string, b: string) => boolean
 
@@ -35,7 +36,7 @@ function check(lines: string[], eq: EqFunc): number {
     let result = 0
     for (let i = 1; result === 0 && i < matrix[0].length; i++)
       result = isSymmetrical(matrix, i, eq) ? i : 0
-    const transposed = transpose(matrix)
+    const transposed = transposeS(matrix)
     for (let i = 1; result === 0 && i < transposed[0].length; i++)
       result = isSymmetrical(transposed, i, eq) ? i * 100 : 0
     count += result
